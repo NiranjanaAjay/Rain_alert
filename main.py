@@ -6,10 +6,9 @@ from twilio.rest import Client
 load_dotenv()
 api_key = os.getenv("api_key")
 
-account_sid = os.environ["TWILIO_ACCOUNT_SID"]
+account_sid = os.environ.get("TWILIO_ACCOUNT_SID")
 auth_token = os.environ["TWILIO_AUTH_TOKEN"]
 client = Client(account_sid, auth_token)
-print(client)
 
 
 LAT = "10.107570"
@@ -32,4 +31,9 @@ for i in range(4):
     if int(weather_id)<700:
         will_rain = True
 if will_rain:
-    print("It will rain")
+    message = client.messages.create(
+        body="Don't forget your umbrella!!",
+        from_="+17542871306",
+        to=os.environ["PHONE_NUM"],
+    )
+    print(message.status)
