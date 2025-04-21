@@ -36,4 +36,3 @@ if will_rain:
         from_="+17542871306",
         to=os.environ["PHONE_NUM"],
     )
-    print(message.status)
